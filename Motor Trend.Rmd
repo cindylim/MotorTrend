@@ -5,13 +5,13 @@ date: "Saturday, May 23, 2015"
 output: pdf_document
 ---
 #Executive Summary
-This report seeks to explore the relationship between a set of variables and miles per gallon (mpg). Weight of car, quarter mile time and type of transmission (automatic or manual) were found to be significantly associated with the outcome variable, mpg.
+This report seeks to explore the relationship between miles per gallon (mpg) and type of transmission (automatic or manual). Manual transmission cars were found to be better for mpg than automatic transmission cars.
 ```{r load data,echo=FALSE}
 data(mtcars)
 ```
 
 #Summary of data
-The set of variables which we consider for exploring the relationship with mpg are the number of cylinders (cyl), engine displacement (disp), gross horsepower (hp), rear axle ratio (drat), weight of car (wt), quarter mile time (qsec), vehicle shape (vs), transmission type (am), number of forward gears (gear) and number of carburetors (carb).
+The set of variables which we consider in this analysis are the number of cylinders (cyl), engine displacement (disp), gross horsepower (hp), rear axle ratio (drat), weight of car (wt), quarter mile time (qsec), vehicle shape (vs), transmission type (am), number of forward gears (gear) and number of carburetors (carb).
 
 From the summary plots given in Appendix 1, we can observe that there seems to be a linear relationship between mpg and cyl, disp, hp, wt and carb. In addition, it also seems that there is a difference in mpg for different vehicle shape and type of transmission.
 
@@ -26,7 +26,7 @@ library(xtable)
 print(xtable(lm.am),comment=F)
 ```
 
-From the results, we estimate an expected `r round(coef(lm.am)[2],2)` increase in mpg when comparing a manual transmission car to an automatic transmission car.
+From the results, we estimate an expected `r round(coef(lm.am)[2],2)` increase in mpg when comparing a manual transmission car to an automatic transmission car. This seems to suggest that a manual transmission car is better for mpg, as compared to an automatic transmission car.
 
 We fit a multivariable regression model next, following the steps outlined previously to only retain significant variables in the final model. The final multivariable regression model had the variables car weight (wt), quarter mile time (qsec) and type of transmission (am) in the model. The coefficients from the model with the associated p-values are shown in the table below.
 ```{r regression final, echo=FALSE, results="asis"}
@@ -45,7 +45,7 @@ plot(lm.multi, which=c(1:2))
 The residuals versus fitted plot for the multivariable regression model indicate that there is some correlation between the residuals and fitted values. The normal Q-Q plot seem to deviate from normality at the ends.
 
 #Conclusion
-In this study, we have explored the relationship between mpg and a set of variables, and have found that the weight of car, quarter mile second and type of transmission to be significantly associated with mpg. From our analyses, type of transmission was not the only variable that was associated with mpg, and thus proceeded to fit a multivariable regression model. However, caution needs to be taken when interpreting the results. The residual and diagnostic plots indicate that other models could also be explored.
+In this study, we found that manual transmission was better for mpg than automatic transmission, even after adjusting for weight of car and quarter mil time which were significantly associated with mpg. Manual transmission cars were able to travel `r round(coef(lm.multi)[4],2)` mpg more than automatic transmission cars.
 
 Note: This report was authored in R Markdown and compiled to pdf via knitr). To view the raw source, please visit the GitHub repo associated with this project at the following link:https://github.com/cindylim/MotorTrend
 \newpage
